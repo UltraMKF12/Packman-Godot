@@ -2,11 +2,13 @@ extends KinematicBody2D
 
 
 onready var raycast: RayCast2D = $RayCast2D
+onready var sprite: AnimatedSprite = $AnimatedSprite
 
 var direction: Vector2 = Vector2.ZERO
 var blocks_per_second: int = 5
 var moving: bool = false
-onready var screen_size = Vector2(152, 176) # TODO: Automatic screen size detection
+var screen_size = Vector2(152, 176) # TODO: Automatic screen size detection
+
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_left"):
@@ -18,10 +20,12 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_down"):
 		direction = Vector2.DOWN
 	
+	
 	#Try to move to direction, if possible
 	if(not moving and direction != Vector2.ZERO):
 		teleport_out_of_bounds(80) # TEMPORAY SOLUTION, 80 is postion.y of the teleport pipes
-		raycast.cast_to = direction * 8
+		rotate_sprite(direction)
+		raycast.cast_to = direction * GameManager.TILE_SIZE
 		raycast.force_raycast_update()
 		if not raycast.is_colliding():
 			move(direction)
@@ -29,23 +33,41 @@ func _process(_delta):
 			direction = Vector2.ZERO
 
 
+# Move, then enable movement again after it's finished
 func move(direction_vector: Vector2):
-	# Move, then enable movement again after it's finished
 	moving = true
 	var tween := create_tween()
-	tween.tween_property(self, "position", position + (direction_vector * 8), 1.0 / blocks_per_second)
+	tween.tween_property(self, "position", position + (direction_vector * GameManager.TILE_SIZE), 1.0 / blocks_per_second)
 	tween.tween_property(self, "moving", false, 0)
 
 
 # Teleports the player from one side of the map to the other
-# Setting position.y FIXES BUG: Pressing up or down lock the player out of bounds
+# Setting position.y FIXES BUG: Pressing up or down locks the player out of bounds
 func teleport_out_of_bounds(y):
-	if position.x+8 < 0:
+	if position.x+GameManager.TILE_SIZE < 0:
 		position.x = screen_size.x
 		position.y = y
 	elif position.x > screen_size.x:
-		position.x = -8
+		position.x = -GameManager.TILE_SIZE
 		position.y = y
+
+
+func rotate_sprite(direction: Vector2):
+	if direction == Vector2.RIGHT:
+		sprite.flip_h = false
+		sprite.rotation_degrees = 0
+	
+	if direction == Vector2.LEFT:
+		sprite.flip_h = true
+		sprite.rotation_degrees = 0
+	
+	if direction == Vector2.UP:
+		if sprite.flip_h: sprite.rotation_degrees = 90
+		else: sprite.rotation_degrees = -90
+	
+	if direction == Vector2.DOWN:
+		if sprite.flip_h: sprite.rotation_degrees = -90
+		else: sprite.rotation_degrees = 90
 
 
 # Eat coins

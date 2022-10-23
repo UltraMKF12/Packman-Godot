@@ -15,6 +15,6 @@ func generate_coins() -> void:
 
 func spawn_coin(tile_position: Vector2):
 	var coin = coin_scene.instance()
-	coin.position = tile_position * 8
+	coin.position = tile_position * GameManager.TILE_SIZE
 	add_child(coin)
 
