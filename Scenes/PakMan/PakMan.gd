@@ -20,6 +20,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_down"):
 		direction = Vector2.DOWN
 	
+	play_audio()
 	
 	#Try to move to direction, if possible
 	if(not moving and direction != Vector2.ZERO):
@@ -70,6 +71,16 @@ func rotate_sprite(direction: Vector2):
 		else: sprite.rotation_degrees = 90
 
 
+# Plays sound while eating coin food stuff
+func play_audio():
+	if $PlayTimer.time_left > 0 and not $AudioStreamPlayer.playing:
+		$AudioStreamPlayer.play()
+	elif $PlayTimer.time_left == 0:
+		$AudioStreamPlayer.stop()
+		
+
+
 # Eat coins
 func _on_Area2D_area_entered(area):
+	$PlayTimer.start($AudioStreamPlayer.stream.get_length())
 	area.queue_free()
