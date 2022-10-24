@@ -81,3 +81,4 @@ func play_audio():
 func _on_Area2D_area_entered(area):
 	$PlayTimer.start($AudioStreamPlayer.stream.get_length())
 	area.queue_free()
+	GameManager.coins -= 1

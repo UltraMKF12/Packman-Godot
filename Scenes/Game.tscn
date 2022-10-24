@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/WallAndFloorTileMap/WallAndFloor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/PakMan/PakMan.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/GhostMan/GhostMan.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Fonts/PressStart2P.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/CoinText.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 6
+font_data = ExtResource( 4 )
 
 [node name="Game" type="Node2D"]
 
@@ -25,3 +31,12 @@ position = Vector2( 24, 48 )
 
 [node name="GhostMan" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32, 128 )
+
+[node name="CoinText" type="Label" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 130.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 1 )
+text = "Coins left: "
+script = ExtResource( 5 )

@@ -94,6 +94,7 @@ animations = [ {
 extents = Vector2( 4, 4 )
 
 [node name="GhostMan" type="KinematicBody2D"]
+collision_layer = 8
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true

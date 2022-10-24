@@ -1,6 +1,7 @@
 extends Node
 
 const TILE_SIZE = 8
+var coins = 0
 
 func _ready():
 	randomize()

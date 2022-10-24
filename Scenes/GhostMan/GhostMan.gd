@@ -16,6 +16,8 @@ func _process(delta):
 		raycast.cast_to = direction * GameManager.TILE_SIZE
 		raycast.force_raycast_update()
 		if not raycast.is_colliding():
+			if(randi() % 10 == 0):
+				direction = get_direction_random() # Little randomness
 			move(direction)
 		else:
 			direction = get_direction_random()
