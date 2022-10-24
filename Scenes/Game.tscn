@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/WallAndFloorTileMap/WallAndFloor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/PakMan/PakMan.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/GhostMan.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/GhostMan/GhostMan.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Node2D"]
 
@@ -16,3 +16,12 @@ position = Vector2( 72, 96 )
 
 [node name="GhostMan" parent="Ghosts" instance=ExtResource( 3 )]
 position = Vector2( 72, 80 )
+
+[node name="GhostMan2" parent="Ghosts" instance=ExtResource( 3 )]
+position = Vector2( 128, 80 )
+
+[node name="GhostMan3" parent="Ghosts" instance=ExtResource( 3 )]
+position = Vector2( 24, 48 )
+
+[node name="GhostMan" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 128 )

@@ -75,7 +75,6 @@ func play_audio():
 		$AudioStreamPlayer.play()
 	elif $PlayTimer.time_left == 0:
 		$AudioStreamPlayer.stop()
-		
 
 
 # Eat coins
