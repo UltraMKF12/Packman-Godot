@@ -24,7 +24,7 @@ func _process(_delta):
 	
 	#Try to move to direction, if possible
 	if(not moving and direction != Vector2.ZERO):
-		teleport_out_of_bounds(80) # TEMPORAY SOLUTION, 80 is postion.y of the teleport pipes
+		teleport_out_of_bounds()
 		rotate_sprite(direction)
 		raycast.cast_to = direction * GameManager.TILE_SIZE
 		raycast.force_raycast_update()
@@ -44,13 +44,11 @@ func move(direction_vector: Vector2):
 
 # Teleports the player from one side of the map to the other
 # Setting position.y FIXES BUG: Pressing up or down locks the player out of bounds
-func teleport_out_of_bounds(y):
-	if position.x+GameManager.TILE_SIZE < 0:
+func teleport_out_of_bounds():
+	if position.x+GameManager.TILE_SIZE <= 0:
 		position.x = screen_size.x
-		position.y = y
-	elif position.x > screen_size.x:
+	elif position.x >= screen_size.x:
 		position.x = -GameManager.TILE_SIZE
-		position.y = y
 
 
 func rotate_sprite(direction: Vector2):
