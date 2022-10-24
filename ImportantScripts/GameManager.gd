@@ -2,6 +2,8 @@ extends Node
 
 const TILE_SIZE = 8
 
+func _ready():
+	randomize()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("fullscreen"):
