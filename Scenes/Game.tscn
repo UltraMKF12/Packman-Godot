@@ -32,11 +32,20 @@ position = Vector2( 24, 48 )
 [node name="GhostMan" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32, 128 )
 
-[node name="CoinText" type="Label" parent="."]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 130.0
-margin_bottom = 18.0
+[node name="CoinText2" type="Label" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 132.0
+margin_bottom = 20.0
 custom_fonts/font = SubResource( 1 )
 text = "Coins left: "
 script = ExtResource( 5 )
+
+[node name="FpsCounter" type="Label" parent="CoinText2"]
+margin_left = 18.0
+margin_top = -2.0
+margin_right = 146.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "FPS"
+align = 2
